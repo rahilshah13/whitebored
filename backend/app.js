@@ -38,13 +38,15 @@ io.on('connection', (socket) => {
     console.log('user disconnected');
   });
 
-  socket.on('my message', (msg) => {
-    console.log('message: ' + msg);
-    io.emit('my broadcast', `server: ${msg}`);
+  socket.on('room', (room) => {
+    console.log('joined room: ' + room);
+    socket.join(room);
+    io.emit('joinedRoom', `socket joined: ${room}`);
   });
 
   socket.on('mouse_output', (data) => {
     //console.log('Drawing Data Received: ' + data);
+    //io.to(room).emit('mouse_input', data);
     io.emit('mouse_input', data);
   });
 

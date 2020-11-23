@@ -24,7 +24,6 @@ function getAllUsers(req, res, next) {
 }
 
 function register(req, res, next) {
-
     userService.addUser(req.body)
         .then(() => res.json({}))
         .catch(err => next(err));
