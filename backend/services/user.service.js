@@ -79,6 +79,5 @@ async function addUser(userParam) {
 
     // save user
     await user.save();
-
 }
 

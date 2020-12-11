@@ -15,6 +15,10 @@ const jwt = require('./_helpers/jwt');
 // Our error handler
 const errorHandler = require('./_helpers/error-handler');
 
+// whiteboard service
+const whiteboardService = require('./services/whiteboard.service');
+
+
 
 //socket.io
 const server = http.createServer(app);
@@ -23,11 +27,11 @@ const io = require('socket.io')(server, {origins: '*:*'});
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
-app.use(jwt());
+//app.use(jwt());
+
 
 app.use('/user', require('./routes/user.router'));
-// app.use('/course', require('./routes/course.router'));
-// app.use('/attendance', require('./routes/attendance.router'));
+app.use('/whiteboard', require('./routes/whiteboard.router'));
 //app.use(errorHandler);
 
 
@@ -38,16 +42,11 @@ io.on('connection', (socket) => {
     console.log('user disconnected');
   });
 
-  socket.on('room', (room) => {
-    console.log('joined room: ' + room);
-    socket.join(room);
-    io.emit('joinedRoom', `socket joined: ${room}`);
-  });
-
   socket.on('mouse_output', (data) => {
     //console.log('Drawing Data Received: ' + data);
     //io.to(room).emit('mouse_input', data);
-    io.emit('mouse_input', data);
+    socket.compress(true).broadcast.emit('mouse_input', data);
+    whiteboardService.saveBoard(data).then();
   });
 
 });
