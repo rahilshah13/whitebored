@@ -1,4 +1,5 @@
 {
   "secret": "a secret that no one should guess",
-  "connectionString": "mongodb://localhost/CSTEST"
+
+  "connectionString": "mongodb://localhost/whitebored"
 }

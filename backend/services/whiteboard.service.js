@@ -21,8 +21,11 @@ async function getBoard(username) {
     return wb.strokes;
 }
 
-async function clearBoard(username) {
-    return Whiteboard.delete({"username": username});
+async function clearBoard(uname) {
+    // console.log("HELLOOO");
+    // console.log(uname);
+    await Whiteboard.deleteOne({ username: uname });
+    return [];
 }
 
 async function saveBoard(data) {

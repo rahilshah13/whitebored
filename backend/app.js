@@ -1,6 +1,8 @@
 const http = require('http');
 const express = require('express');
 const app = express();
+//const compression = require('compression');
+
 
 /*CORS stands for Cross Origin Resource Sharing and allows modern web browsers to be able to send AJAX requests and receive HTTP responses for resource from other domains other that the domain serving the client side application.*/
 const cors = require('cors');
@@ -19,10 +21,53 @@ const errorHandler = require('./_helpers/error-handler');
 const whiteboardService = require('./services/whiteboard.service');
 
 
+// serving static files
+const path = require('path');
+const allowedExt = ['.js','.ico','.css','.png','.jpg','.woff2','.woff','.ttf','.svg','.ts', '.html'];
+app.use('/', express.static(path.join(__dirname, '../frontend/dist/frontend')));
+
+
+
+app.use(['/feed', '/myboard', '/register', '/login', '/home'], (req, res) => {
+  if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+    console.log(req.body);
+    res.sendFile(path.join(__dirname, `../frontend/dist/frontend${req.url}`));
+  }
+  else{
+    console.log(req.body);
+    res.sendFile(path.join(__dirname, '../frontend/dist/frontend/index.html'));
+  }
+});
+
+// app.use('/myboard', (req, res) => {
+//   if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+//     console.log(req.body);
+//     res.sendFile(path.join(__dirname, `../frontend/dist/frontend${req.url}`));
+//   }
+//   else{
+//     console.log(req.body);
+//     res.sendFile(path.join(__dirname, '../frontend/dist/frontend/index.html'));
+//   }
+// });
+//
+// app.use('/login', (req, res) => {
+//   if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+//     console.log(req.body);
+//     res.sendFile(path.join(__dirname, `../frontend/dist/frontend${req.url}`));
+//   }
+//   else{
+//     console.log(req.body);
+//     res.sendFile(path.join(__dirname, '../frontend/dist/frontend/index.html'));
+//   }
+// });
+
+
+
 
 //socket.io
 const server = http.createServer(app);
 const io = require('socket.io')(server, {origins: '*:*'});
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -32,6 +77,8 @@ app.use(cors());
 
 app.use('/user', require('./routes/user.router'));
 app.use('/whiteboard', require('./routes/whiteboard.router'));
+app.use('/', express.static(path.join(__dirname, '../frontend/dist/frontend')));
+
 //app.use(errorHandler);
 
 
@@ -62,3 +109,15 @@ app.listen(4000, function () {
 server.listen(5000, () => {
   console.log('listening on *:5000');
 });
+
+
+//compression
+// function shouldCompress (req, res) {
+//   if (req.headers['x-no-compression']) {
+//     // don't compress responses with this request header
+//     return false
+//   }
+//
+//   // fallback to standard filter function
+//   return compression.filter(req, res)
+// }
