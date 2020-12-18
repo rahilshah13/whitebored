@@ -1,0 +1,17 @@
+.example-spacer {
+  /*flex: 1 1 auto;*/
+  padding-top: 1.2%;
+  display:grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  justify-items: center;
+  font-size: 1.25vw;
+}
+
+.padding {
+  padding-left: 50%;
+}
+
+.divider {
+  font: 700 24px/32px Roboto, "Helvetica Neue", sans-serif;
+  font-size: 1.25vw;
+}

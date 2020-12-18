@@ -1,0 +1,10 @@
+
+<div class="container">
+<!--  <div *ngFor="let user of users" class="wbholder">-->
+<!--      <p>{{user.username}}'s board</p>-->
+<!--      <app-whiteboard></app-whiteboard>-->
+<!--  </div>-->
+    <div *ngFor="let user of users" class="wbholder" id="{{user.username}}">
+        <app-whiteboard [user]="user"></app-whiteboard>
+    </div>
+</div>

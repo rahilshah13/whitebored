@@ -1,0 +1,21 @@
+<mat-toolbar *ngIf="isUser">
+  <div class="example-spacer">
+    <div class="example-spacer"> whitebored.io </div>
+
+    <div>
+      <button class="divider" mat-button routerLink="/">home</button>
+      <!--    <button mat-button routerLink="/admin" *ngIf="isProf" >Registered users</button>-->
+      <span class="divider"> | </span>
+      <button class="divider" mat-button routerLink="/feed" >feed</button>
+      <span class="divider"> | </span>
+      <button class="divider" mat-button routerLink="/myboard" >my board</button>
+    </div>
+
+    <div class="padding">
+      <button class="divider" mat-button (click)="logout()">logout </button>
+    </div>
+
+  </div>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

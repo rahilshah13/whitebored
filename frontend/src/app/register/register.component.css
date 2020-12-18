@@ -1,0 +1,19 @@
+.form-group {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.form-group > * {
+  width: 100%;
+}
+
+.registration-card {
+  max-width: 800px;
+}
+
+.container {
+  padding-top: 5%;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
