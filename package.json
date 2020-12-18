@@ -4,24 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rahilshah13/whitebored.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rahilshah13/whitebored/issues"
-  },
-  "homepage": "https://github.com/rahilshah13/whitebored#readme"
-}
-{
-  "name": "whitebored",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
     "start": "node ./backend/app.js"
   },
   "dependencies": {
@@ -43,5 +25,15 @@
   "devDependencies": {
     "express-unless": "^0.5.0",
     "jsonwebtoken": "^8.5.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahilshah13/whitebored.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rahilshah13/whitebored/issues"
+  },
+  "homepage": "https://github.com/rahilshah13/whitebored#readme"
 }
